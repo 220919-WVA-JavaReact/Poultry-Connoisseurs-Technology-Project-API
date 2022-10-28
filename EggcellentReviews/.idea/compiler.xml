@@ -9,5 +9,8 @@
         <module name="EggcellentReviews" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="EggcellentReviews" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
