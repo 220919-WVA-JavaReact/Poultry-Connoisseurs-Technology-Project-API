@@ -27,4 +27,4 @@ API for the movie app we will be making
 - [FEATURE] - Movie Ratings
 - [FEATURE] - Notifications
 - [FEATURE] - Password Reset
-- [FEATURE] - Movie Recommendations
+- [FEATURE] - Movie Recommendations!
