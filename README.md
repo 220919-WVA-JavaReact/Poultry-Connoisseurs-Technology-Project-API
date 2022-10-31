@@ -1,7 +1,7 @@
-# Poultry-Connoisseurs-Technology-Project-API
+# Eggcellent Reviews
 
 ## Description
-API for the movie app we will be making
+API for the official Eggcellent Reviews website.
 
 ## Executive Summary
 - Movie App will provide a platform for users to read about and review movies.
@@ -27,4 +27,84 @@ API for the movie app we will be making
 - [FEATURE] - Movie Ratings
 - [FEATURE] - Notifications
 - [FEATURE] - Password Reset
-- [FEATURE] - Movie Recommendations!
+- [FEATURE] - Movie Recommendations
+
+
+## Endpoints
+    - /auth
+        - POST
+            - HTTP Request
+                - url: "http://localhost:8080/egg/auth"
+                - header: Content-type: JSON
+                - Body: { "username":user, "password":pass }
+            - HTTP Response
+                - status code
+                    - 200: success
+                    - 400: unable to login
+                body:
+                    - Principal - UserDTO
+                Header:
+                    - set-cookie: JSessionID
+
+
+    - /users
+        - GET
+            - /users
+                - HTTP Request
+                    - url: "http://localhost:8080/egg/users"
+                    - headers:
+                     - cookie: JSessionID
+                        - MUST be admin
+                - HTTP Response
+                    - status code
+                        - 200: success
+                        - 401: unauthorized
+                - body
+                    - UserDTO[]
+                - Header:
+                    - content-type: JSON
+        - PUT
+            - /ban
+                - HTTP Request
+                    - url: "http://localhost:8080/egg/users/userID
+                    - headers:
+                     - cookie: JSessionId
+                        - MUST be admin
+                - HTTP Response
+                    - status code
+                        - 200: success
+                        - 401: unauthorized
+                        - 403: access level higher req
+                - body
+                    - UserDTO
+                - Header:
+                    - content-type:JSON
+
+    - /reviews
+        - GET
+            - /movieID
+                - HTTP Request
+                    - url: "http://localhost:8080/egg/reviews"
+                    - headers:
+                     - None unless storing JSessionID
+                - HTTP Response
+                    - status code
+                        - 200: success
+                        - 500: error retrieving info
+                - body
+                    - Review[]
+                - Header:
+                    - content-type: JSON
+            - /users/userID
+                - HTTP Request
+                    - url: "http://localhost:8080/egg/reviews/users/userID"
+                    - headers:
+                     - None unless storing JSessionID
+                - HTTP Response
+                    - status code
+                        - 200: success
+                        - 500: error retrieving info
+                - body
+                    - Review[]
+                - Header:
+                    - content-type: JSON
