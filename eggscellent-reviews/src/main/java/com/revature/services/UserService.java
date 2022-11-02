@@ -6,6 +6,7 @@ import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,10 +17,12 @@ public class UserService {
         this.ur = ur;
     }
 
-    public UserDTO getUserByUsername(String username) {
-        User user = ur.findByUsername(username).orElseThrow(() -> new UserNotFoundException());
+    public UserDTO getUserById(String id) {
+        User user = ur.findById(id).orElseThrow(() -> new UserNotFoundException());
         UserDTO userDTO = new UserDTO(user);
 
+        return userDTO;
+        //response entity
     }
 
 }
