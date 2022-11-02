@@ -1,4 +1,16 @@
 package com.revature.repositories;
 
-public interface UserRepository {
+import com.revature.entities.Role;
+import com.revature.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface UserRepository extends JpaRepository<User,String> {
+
+    User findByUsername(String username);
+    List<User> findUsersByRole(Role role);
+
 }

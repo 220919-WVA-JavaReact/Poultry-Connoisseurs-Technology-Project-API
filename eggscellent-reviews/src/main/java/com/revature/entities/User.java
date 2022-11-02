@@ -1,24 +1,28 @@
 package com.revature.entities;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-// This is where @Table will go to define our database
+@Table(name="users")
 public class User {
 // this is where the @Column variable goes along with @Id
+
+    @Id
+    @Column(name="user_id")
     private String id;
-    // this is where the @Column variable goes
+    @Column(nullable = false)
     private String first;
-    // this is where the @Column variable goes
+    @Column(nullable = false)
     private String last;
-    // this is where the @Column variable goes
+    @Column(unique = true, nullable = false)
     private String username;
-    // this is where the @Column variable goes
+    @Column(nullable = false)
     private String password;
-// this is where the @Enumerated variable goes
+    @Enumerated(EnumType.STRING)
     private Role role;
+    //do our relationships
 
     //stretch goal views views_status
 
