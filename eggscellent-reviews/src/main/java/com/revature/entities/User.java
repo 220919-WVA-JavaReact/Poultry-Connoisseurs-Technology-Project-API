@@ -2,6 +2,7 @@ package com.revature.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -10,11 +11,11 @@ public class User {
 // this is where the @Column variable goes along with @Id
 
     @Id
-    @Column(name="user_id")
-    private String id;
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int user_id;
+    @Column(name = "first_name", nullable = false)
     private String first;
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String last;
     @Column(unique = true, nullable = false)
     private String username;
@@ -26,17 +27,32 @@ public class User {
 
     //stretch goal views views_status
 
+    public User(int id, String first, String last, String username, String password, Role role) {
+        this.user_id = id;
+        this.first = first;
+        this.last = last;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(String first, String last, String username, String password, Role role) {
+        this.first = first;
+        this.last = last;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     public User() {
-        this.id = UUID.randomUUID().toString();
     }
 
-    public String getId() {
-        return id;
+    public int getId() {
+        return user_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int id) {
+        this.user_id = id;
     }
 
     public String getFirst() {
@@ -84,18 +100,18 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(first, user.first) && Objects.equals(last, user.last) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && role == user.role;
+        return Objects.equals(user_id, user.user_id) && Objects.equals(first, user.first) && Objects.equals(last, user.last) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, first, last, username, password, role);
+        return Objects.hash(user_id, first, last, username, password, role);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
+                "id='" + user_id + '\'' +
                 ", first='" + first + '\'' +
                 ", last='" + last + '\'' +
                 ", username='" + username + '\'' +

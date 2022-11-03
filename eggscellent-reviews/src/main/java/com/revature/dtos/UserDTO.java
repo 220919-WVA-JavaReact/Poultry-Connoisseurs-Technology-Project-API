@@ -6,7 +6,7 @@ import com.revature.entities.User;
 import java.util.Objects;
 
 public class UserDTO {
-    private String id;
+    private int id;
     private String username;
     private Role role;
     //rooster/manager id
@@ -18,11 +18,11 @@ public class UserDTO {
         this.role = user.getRole();
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
