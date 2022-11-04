@@ -8,7 +8,6 @@ import java.util.UUID;
 @Entity
 @Table(name="users")
 public class User {
-// this is where the @Column variable goes along with @Id
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
