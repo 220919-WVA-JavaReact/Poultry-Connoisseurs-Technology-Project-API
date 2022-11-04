@@ -10,8 +10,8 @@ public class UserDTO {
     private String username;
     private Role role;
     //rooster/manager id
-
-
+    public UserDTO(){
+    }
     public UserDTO(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
