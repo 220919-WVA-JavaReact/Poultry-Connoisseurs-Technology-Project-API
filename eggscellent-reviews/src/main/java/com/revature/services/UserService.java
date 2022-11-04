@@ -4,6 +4,7 @@ import com.revature.dtos.RegisterDTO;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
 import com.revature.entities.User;
+import com.revature.exceptions.RegisterException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class UserService {
         //check if username from register instance exists
         User user = ur.findUserByUsername(register.getUsername());
         if (user!=null) {
-            //exception here?
+            throw new RegisterException();
         } else {
             User newUser = new User();
             newUser.setFirst(register.getFirstName());
