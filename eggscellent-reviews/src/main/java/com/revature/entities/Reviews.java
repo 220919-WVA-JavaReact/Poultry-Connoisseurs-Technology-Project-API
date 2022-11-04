@@ -9,6 +9,7 @@ import java.util.UUID;
 public class Reviews {
     @Id
     @Column(name="review_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @ManyToOne
