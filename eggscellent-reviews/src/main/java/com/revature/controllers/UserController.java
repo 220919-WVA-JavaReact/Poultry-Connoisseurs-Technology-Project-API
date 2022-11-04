@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.dtos.RegisterDTO;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
 import com.revature.entities.User;
@@ -45,7 +46,9 @@ public class UserController {
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-//    @PostMapping
-//    public R
-    // localhost8080/users/{username} => above function
+    @PostMapping
+    public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterDTO register) {
+        UserDTO userDTO = us.registerUser(register);
+        return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+    }
 }
