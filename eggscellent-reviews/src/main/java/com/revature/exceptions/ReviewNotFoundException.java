@@ -1,4 +1,4 @@
 package com.revature.exceptions;
 
-public class ReviewNotFoundException {
+public class ReviewNotFoundException extends RuntimeException{
 }
