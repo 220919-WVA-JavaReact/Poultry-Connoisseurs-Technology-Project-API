@@ -17,7 +17,7 @@ public class Reviews {
 
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
-    private Movies movie_id;
+    private Movies movieId;
 
     public Reviews(){
     }
@@ -39,11 +39,11 @@ public class Reviews {
     }
 
     public Movies getMovie_id() {
-        return movie_id;
+        return movieId;
     }
 
     public void setMovie_id(Movies movie_id) {
-        this.movie_id = movie_id;
+        this.movieId = movie_id;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Reviews {
         return "Reviews{" +
                 "id='" + id + '\'' +
                 ", user_id=" + user_id +
-                ", movie_id=" + movie_id +
+                ", movie_id=" + movieId +
                 '}';
     }
 
@@ -60,11 +60,11 @@ public class Reviews {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reviews reviews = (Reviews) o;
-        return Objects.equals(id, reviews.id) && Objects.equals(user_id, reviews.user_id) && Objects.equals(movie_id, reviews.movie_id);
+        return Objects.equals(id, reviews.id) && Objects.equals(user_id, reviews.user_id) && Objects.equals(movieId, reviews.movieId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user_id, movie_id);
+        return Objects.hash(id, user_id, movieId);
     }
 }
