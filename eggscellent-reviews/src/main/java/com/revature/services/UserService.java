@@ -31,6 +31,12 @@ public class UserService {
         //response entity
     }
 
+    public UserDTO getUserByUsername(String username) throws UserNotFoundException {
+        User user = ur.findUserByUsername(username).orElseThrow(() -> new UserNotFoundException());
+        UserDTO userDTO = new UserDTO(user);
+        return userDTO;
+    }
+
     public List<UserDTO> getAllUsers() {
         List<User> users = ur.findAll();
         List<UserDTO> userDTO = users.stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
@@ -45,21 +51,18 @@ public class UserService {
 
     public UserDTO registerUser(RegisterDTO register) {
         //check if username from register instance exists
-        User user = ur.findUserByUsername(register.getUsername());
-        if (user!=null) {
+        if (ur.findUserByUsername(register.getUsername()).isPresent()){
             throw new RegisterException();
-        } else {
-            User newUser = new User();
-            newUser.setFirst(register.getFirstName());
-            newUser.setLast(register.getLastName());
-            newUser.setUsername(register.getUsername());
-            newUser.setPassword(register.getPassword());
-            newUser.setRole(Role.EGG);
-
-            // .save saves into the database
-            user = ur.save(newUser);
         }
 
-        return new UserDTO(user);
+        User newUser = new User();
+        newUser.setFirst(register.getFirstName());
+        newUser.setLast(register.getLastName());
+        newUser.setUsername(register.getUsername());
+        newUser.setPassword(register.getPassword());
+        newUser.setRole(Role.EGG);
+
+        // .save saves into the database
+        return new UserDTO(ur.save(newUser));
     }
 }

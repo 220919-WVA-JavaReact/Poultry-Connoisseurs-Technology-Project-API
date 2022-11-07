@@ -23,7 +23,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
     //do our relationships
-
+    @ManyToOne
+    private User moderator;
     //stretch goal views views_status
 
     public User(int id, String first, String last, String username, String password, Role role) {
@@ -46,12 +47,12 @@ public class User {
     public User() {
     }
 
-    public int getId() {
+    public int getUser_id() {
         return user_id;
     }
 
-    public void setId(int id) {
-        this.user_id = id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getFirst() {
@@ -94,28 +95,11 @@ public class User {
         this.role = role;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(user_id, user.user_id) && Objects.equals(first, user.first) && Objects.equals(last, user.last) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && role == user.role;
+    public User getModerator() {
+        return moderator;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(user_id, first, last, username, password, role);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + user_id + '\'' +
-                ", first='" + first + '\'' +
-                ", last='" + last + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
+    public void setModerator(User moderator) {
+        this.moderator = moderator;
     }
 }

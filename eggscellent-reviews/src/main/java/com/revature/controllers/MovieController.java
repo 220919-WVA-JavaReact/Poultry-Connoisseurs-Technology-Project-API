@@ -1,6 +1,6 @@
 package com.revature.controllers;
 
-import com.revature.entities.Movies;
+import com.revature.entities.Movie;
 import com.revature.services.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ public class MovieController {
     private MovieService ms;
 
     @GetMapping("/{movieId}")
-    public ResponseEntity<Movies> getById(@PathVariable("id") int id) {
-        Movies movie = ms.getMovieById(id);
+    public ResponseEntity<Movie> getById(@PathVariable("id") int id) {
+        Movie movie = ms.getMovieById(id);
         return new ResponseEntity<>(movie, HttpStatus.OK);
     }
 

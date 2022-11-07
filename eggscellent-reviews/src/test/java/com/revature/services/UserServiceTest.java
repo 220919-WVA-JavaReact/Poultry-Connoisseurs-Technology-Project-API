@@ -1,25 +1,22 @@
 package com.revature.services;
 
 import com.revature.EggscellentReviewsApplication;
-import com.revature.EggscellentReviewsApplicationTests;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
 import com.revature.entities.User;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.UserRepository;
-import com.revature.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.MockBeans;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-@SpringBootTest(classes = EggscellentReviewsApplicationTests.class )
+@SpringBootTest(classes = EggscellentReviewsApplication.class)
 public class UserServiceTest {
 
     @MockBean
@@ -32,7 +29,7 @@ public class UserServiceTest {
     public void getUserByIdExists(){
         //A1
         User returnUser = new User();
-        returnUser.setId(2);
+        returnUser.setUser_id(2);
         returnUser.setUsername("egglord");
         returnUser.setPassword("chicky");
         returnUser.setRole(Role.EGG);
@@ -46,8 +43,8 @@ public class UserServiceTest {
 
         //A2
 
-        UserDTO actual = sut.getUserById("1");
-        //Assert
+        UserDTO actual = sut.getUserById("2");
+        //A3
 
         assertEquals(expected, actual);
     }
@@ -60,22 +57,30 @@ public class UserServiceTest {
         assertThrows(UserNotFoundException.class, () -> sut.getUserById("500000000"));
     }
 
-//    @Test
-//    public void getUserByUsernameExists(){
-//        // A-1
-//        User returnedUser = new User();
-//        returnedUser.setId(1);
-//        returnedUser.setUsername("rooster-luvr69");
-//        returnedUser.setPassword("eggy");
-//        returnedUser.setRole(Role.ROOSTER);
-//        Mockito.when(mockRepository.findUserByUsername("rosster-luvr69")).thenReturn(Optional.ofNullable(returnedUser));
-//
-//        UserDTO expected = new UserDTO();
-//        expected.setId(1);
-//        expected.setUsername("rooster-luvr69");
-//        expected.setRole(Role.ROOSTER);
-//
-//        UserDTO actual = sut.getUserByUsername()
-//
-//    }
+    @Test
+    public void getUserByUsernameExists(){
+        // A-1
+        User returnedUser = new User();
+        returnedUser.setUser_id(1);
+        returnedUser.setUsername("rooster-luvr69");
+        returnedUser.setPassword("eggy");
+        returnedUser.setRole(Role.ROOSTER);
+        Mockito.when(mockRepository.findUserByUsername("rosster-luvr69")).thenReturn(Optional.of(returnedUser));
+
+        UserDTO expected = new UserDTO();
+        expected.setId(1);
+        expected.setUsername("rooster-luvr69");
+        expected.setRole(Role.ROOSTER);
+        // A-2
+        UserDTO actual = sut.getUserByUsername("rooster-luvr");
+        // A-3
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getUserByUsernameDoesNotExist(){
+        Mockito.when(mockRepository.findUserByUsername("egg-sucker420")).thenReturn(Optional.empty());
+
+        assertThrows(UserNotFoundException.class, () -> sut.getUserByUsername("egg-sucker420"));
+    }
 }

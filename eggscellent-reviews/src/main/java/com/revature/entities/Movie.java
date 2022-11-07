@@ -2,11 +2,10 @@ package com.revature.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name="movies")
-public class Movies {
+public class Movie {
 
     @Id
     @Column(name = "id")
@@ -26,7 +25,7 @@ public class Movies {
 
 
 
-    public Movies(String id, String title, Integer runtime, String stars, Float rating) {
+    public Movie(String id, String title, Integer runtime, String stars, Float rating) {
         this.id = id;
         this.title = title;
         this.runtime = runtime;
@@ -89,7 +88,7 @@ public class Movies {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Movies movies = (Movies) o;
+        Movie movies = (Movie) o;
         return Objects.equals(id, movies.id) && Objects.equals(title, movies.title) && Objects.equals(runtime, movies.runtime) && Objects.equals(stars, movies.stars) && Objects.equals(rating, movies.rating);
     }
 
