@@ -11,7 +11,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    private String user_id;
     @Column(name = "first_name", nullable = false)
     private String first;
     @Column(name = "last_name", nullable = false)
@@ -27,7 +27,7 @@ public class User {
     private User moderator;
     //stretch goal views views_status
 
-    public User(int id, String first, String last, String username, String password, Role role) {
+    public User(String id, String first, String last, String username, String password, Role role) {
         this.user_id = id;
         this.first = first;
         this.last = last;
@@ -47,11 +47,11 @@ public class User {
     public User() {
     }
 
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
