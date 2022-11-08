@@ -18,14 +18,11 @@ import java.util.List;
 public class UserController {
     private UserService us;
 
-
-
     @Autowired
     public UserController(UserService us){
         System.out.println("UserController was instantiated");
         this.us = us;
     }
-
 
     public ResponseEntity<List<UserDTO>> getUsers(@RequestParam(name="role", required = false) Role role){
         List<UserDTO> users = null;
@@ -42,7 +39,12 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getById(@PathVariable("id") String id) {
         UserDTO userDTO = us.getUserById(id);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
 
+    @GetMapping("uname/{username}")
+    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable("username") String username){
+        UserDTO userDTO = us.getUserByUsername(username);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 

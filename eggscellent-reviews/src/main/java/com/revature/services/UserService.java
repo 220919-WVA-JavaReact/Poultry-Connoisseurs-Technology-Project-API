@@ -18,6 +18,12 @@ import java.util.stream.Collectors;
 public class UserService {
     private UserRepository ur;
 
+    public UserDTO getUserByUsername(String username) {
+        User user = ur.findByUsername(username);
+        UserDTO userDTO = new UserDTO(user);
+        return userDTO;
+    }
+
     @Autowired
     public UserService(UserRepository ur) {
         this.ur = ur;
