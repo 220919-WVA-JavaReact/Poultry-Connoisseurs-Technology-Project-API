@@ -37,7 +37,7 @@ public class UserServiceTest {
 
 
         UserDTO expected = new UserDTO();
-        expected.setId(2);
+        expected.setId("2");
         expected.setUsername("egglord");
         expected.setRole(Role.EGG);
 
@@ -68,7 +68,7 @@ public class UserServiceTest {
         Mockito.when(mockRepository.findUserByUsername("rosster-luvr69")).thenReturn(Optional.of(returnedUser));
 
         UserDTO expected = new UserDTO();
-        expected.setId(1);
+        expected.setId("1");
         expected.setUsername("rooster-luvr69");
         expected.setRole(Role.ROOSTER);
         // A-2
