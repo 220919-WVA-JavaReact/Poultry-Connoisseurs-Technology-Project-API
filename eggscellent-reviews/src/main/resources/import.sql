@@ -8,8 +8,8 @@ insert into movie (id, title, runtime, stars, rating) values ('1', 'Richettes', 
 insert into movie (id, title, runtime, stars, rating) values ('2', 'life of chicken', 111, 'four', 3);
 insert into movie (id, title, runtime, stars, rating) values ('3', 'life of chicken prequel', 56, 'three', 4);
 insert into movie (id, title, runtime, stars, rating) values ('4', 'life of chickens son', 76, 'two', 4);
-insert into reviews (review_id, user_id, movie_id) values ('1', 123456, 1);
-insert into reviews (review_id, user_id, movie_id) values ('2', 567890, 1);
-insert into reviews (review_id, user_id, movie_id) values ('3', 54, 2);
-insert into reviews (review_id, user_id, movie_id) values ('4', 999, 2);
-insert into reviews (review_id, user_id, movie_id) values ('5', 67544, 1);
+insert into reviews (review_id, user_id, title, summary, movie_id) values ('1', '123456', 'This movie sucks', 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT ', '1');
+insert into reviews (review_id, user_id, title, summary, movie_id) values ('2', '567890', "Worst thing I've ever seen", 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT ', '1');
+insert into reviews (review_id, user_id, title, summary, movie_id) values ('3', '54', 'Good thing I recently had eye surgery', 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT ', '2');
+insert into reviews (review_id, user_id, title, summary, movie_id) values ('4', '999', 'Only diehard fans will like this pile of', 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT ', '2');
+insert into reviews (review_id, user_id, title, summary, movie_id) values ('5', '67544', 'Yeah this was a massive disappointment.', 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT ', '1');
