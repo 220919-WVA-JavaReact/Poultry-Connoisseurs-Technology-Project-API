@@ -24,6 +24,8 @@ public class Movie {
     private Float rating;
 
 
+    public Movie() {
+    }
 
     public Movie(String id, String title, Integer runtime, String stars, Float rating) {
         this.id = id;

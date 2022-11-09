@@ -24,6 +24,7 @@ public class UserController {
         this.us = us;
     }
 
+    @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers(@RequestParam(name="role", required = false) Role role){
         List<UserDTO> users = null;
 
@@ -47,7 +48,7 @@ public class UserController {
         UserDTO userDTO = us.getUserByUsername(username);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
-
+// Register currently broken because of ID assignment issues.
     @PostMapping
     public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterDTO register) {
         UserDTO userDTO = us.registerUser(register);

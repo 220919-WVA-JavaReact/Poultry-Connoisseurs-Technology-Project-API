@@ -12,7 +12,7 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private User user_id;
+    private User userId;
 
     @Column(nullable = false)
     private String title;
@@ -34,12 +34,12 @@ public class Review {
         this.id = id;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -62,15 +62,15 @@ public class Review {
         return movieId;
     }
 
-    public void setMovieId(Movie movie_id) {
-        this.movieId = movie_id;
+    public void setMovieId(Movie movieId) {
+        this.movieId = movieId;
     }
 
     @Override
     public String toString() {
         return "Review{" +
                 "id='" + id + '\'' +
-                ", user_id=" + user_id +
+                ", user_id=" + userId +
                 ", title='" + title + '\'' +
                 ", summary='" + summary + '\'' +
                 ", movieId=" + movieId +
@@ -82,11 +82,11 @@ public class Review {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return Objects.equals(id, review.id) && Objects.equals(user_id, review.user_id) && Objects.equals(title, review.title) && Objects.equals(summary, review.summary) && Objects.equals(movieId, review.movieId);
+        return Objects.equals(id, review.id) && Objects.equals(userId, review.userId) && Objects.equals(title, review.title) && Objects.equals(summary, review.summary) && Objects.equals(movieId, review.movieId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user_id, title, summary, movieId);
+        return Objects.hash(id, userId, title, summary, movieId);
     }
 }

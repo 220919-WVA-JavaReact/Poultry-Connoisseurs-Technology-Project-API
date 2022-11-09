@@ -62,7 +62,7 @@ public class UserService {
         newUser.setPassword(register.getPassword());
         newUser.setRole(Role.EGG);
 
-        // .save saves into the database
+        // SAVE EXPECTS EITHER : WE ASSIGN AN ID ABOVE^^   (( OR ))   we put logic in entities to assign id on creation
         return new UserDTO(ur.save(newUser));
     }
 }
