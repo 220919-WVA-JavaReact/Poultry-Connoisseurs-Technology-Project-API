@@ -9,6 +9,10 @@ public class UserDTO {
     private String id;
     private String username;
     private Role role;
+
+    private String first;
+
+    private String last;
     //rooster/manager id
     public UserDTO(){
     }
@@ -16,9 +20,11 @@ public class UserDTO {
         this.id = user.getUserId();
         this.username = user.getUsername();
         this.role = user.getRole();
+        this.first = user.getFirst();
+        this.last = user.getLast();
     }
 
-    public String  getId() {
+    public String getId() {
         return id;
     }
 
@@ -42,25 +48,43 @@ public class UserDTO {
         this.role = role;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserDTO userDTO = (UserDTO) o;
-        return Objects.equals(id, userDTO.id) && Objects.equals(username, userDTO.username) && role == userDTO.role;
+    public String getFirst() {
+        return first;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, role);
+    public void setFirst(String first) {
+        this.first = first;
+    }
+
+    public String getLast() {
+        return last;
+    }
+
+    public void setLast(String last) {
+        this.last = last;
     }
 
     @Override
     public String toString() {
         return "UserDTO{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", username='" + username + '\'' +
                 ", role=" + role +
+                ", first='" + first + '\'' +
+                ", last='" + last + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDTO userDTO = (UserDTO) o;
+        return id == userDTO.id && Objects.equals(username, userDTO.username) && role == userDTO.role && Objects.equals(first, userDTO.first) && Objects.equals(last, userDTO.last);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, role, first, last);
     }
 }
