@@ -29,7 +29,7 @@ public class UserServiceTest {
     public void getUserByIdExists(){
         //A1
         User returnUser = new User();
-        returnUser.setUser_id("2");
+        returnUser.setUserId("2");
         returnUser.setUsername("egglord");
         returnUser.setPassword("chicky");
         returnUser.setRole(Role.EGG);
@@ -61,7 +61,7 @@ public class UserServiceTest {
     public void getUserByUsernameExists(){
         // A-1
         User returnedUser = new User();
-        returnedUser.setUser_id("1");
+        returnedUser.setUserId("1");
         returnedUser.setUsername("rooster-luvr69");
         returnedUser.setPassword("eggy");
         returnedUser.setRole(Role.ROOSTER);
