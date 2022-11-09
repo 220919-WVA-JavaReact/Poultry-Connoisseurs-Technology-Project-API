@@ -38,7 +38,7 @@ public class Review {
         return userId;
     }
 
-    public void setUser_id(User userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
