@@ -11,7 +11,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String user_id;
+    private String userId;
     @Column(name = "first_name", nullable = false)
     private String first;
     @Column(name = "last_name", nullable = false)
@@ -28,7 +28,7 @@ public class User {
     //stretch goal views views_status
 
     public User(String id, String first, String last, String username, String password, Role role) {
-        this.user_id = id;
+        this.userId = id;
         this.first = first;
         this.last = last;
         this.username = username;
@@ -48,11 +48,11 @@ public class User {
     }
 
     public String getUser_id() {
-        return user_id;
+        return userId;
     }
 
     public void setUser_id(String user_id) {
-        this.user_id = user_id;
+        this.userId = userId;
     }
 
     public String getFirst() {
