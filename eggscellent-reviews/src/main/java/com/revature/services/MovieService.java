@@ -6,6 +6,7 @@ import com.revature.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,4 +27,15 @@ public class MovieService {
             throw new MovieNotFoundException();
         }
     }
+
+    public List<Movie> getAllMovies() {
+        List<Movie> movies = mr.findAll();
+
+        if (movies == null) {
+            throw new MovieNotFoundException();
+        } else {
+            return movies;
+        }
+    }
+
 }

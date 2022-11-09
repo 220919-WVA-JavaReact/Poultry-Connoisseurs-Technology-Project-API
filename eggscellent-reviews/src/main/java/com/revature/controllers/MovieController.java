@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
@@ -26,6 +28,15 @@ public class MovieController {
     public ResponseEntity<Movie> getMovieById(@PathVariable("movieId") String id) {
         Movie movie = ms.findByMovieId(id);
         return new ResponseEntity<>(movie, HttpStatus.OK);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<Movie>> getHomePageMovies(){
+        List<Movie> movies;
+
+        movies = ms.getAllMovies();
+        System.out.println(movies);
+        return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 
 }
