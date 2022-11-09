@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Review;
 import com.revature.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class ReviewController {
 // This one is also not currently working, ummm we also get an illegalargumentsexception which says the parameter does not have the expected type.
     //java.lang.IllegalArgumentException: Parameter value [1] did not match expected type [com.revature.entities.Movie (n/a)]
     @GetMapping("/{movieID}")
-    public ResponseEntity<List<Review>> getReviewsByMovieId(@PathVariable("movieID") String id) {
-        List<Review> reviews = rs.getReviewsByMovieId(id);
+    public ResponseEntity<List<ReviewDTO>> getReviewsByMovieId(@PathVariable("movieID") String id) {
+        List<ReviewDTO> reviews = rs.getReviewsByMovieId(id);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 

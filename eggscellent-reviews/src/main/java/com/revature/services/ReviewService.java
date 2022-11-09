@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Movie;
 import com.revature.entities.Review;
 import com.revature.exceptions.MovieNotFoundException;
@@ -9,8 +10,10 @@ import com.revature.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -23,14 +26,20 @@ public class ReviewService {
         this.rr = rr;
         this.mr = mr;
     }
-    public List<Review> getReviewsByMovieId(String id) {
+    public List<ReviewDTO> getReviewsByMovieId(String id) {
         Optional<Movie> foundMovie = mr.findMovieById(id);
 
         if (foundMovie.isPresent()){
             Movie movie = foundMovie.get();
 
             List<Review> foundReviews = rr.findByMovieId(movie);
-            return foundReviews;
+            List<ReviewDTO> parsedReviews = foundReviews.stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
+//            List<ReviewDTO> parsedReviews = new ArrayList<ReviewDTO>();
+//            for(Review review: foundReviews){
+//                parsedReviews.add(new ReviewDTO(review));
+//            }
+            return parsedReviews;
+
         } else {
             throw new ReviewNotFoundException();
         }
