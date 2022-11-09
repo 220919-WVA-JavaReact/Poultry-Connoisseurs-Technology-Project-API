@@ -1,12 +1,15 @@
 package com.revature.services;
 
+import com.revature.entities.Movie;
 import com.revature.entities.Review;
+import com.revature.exceptions.MovieNotFoundException;
 import com.revature.exceptions.ReviewNotFoundException;
 import com.revature.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReviewService {
@@ -15,12 +18,13 @@ public class ReviewService {
 
     @Autowired
     public ReviewService(ReviewRepository rr) { this.rr = rr; }
-    public List<Review> getReviewsByMovieId(int id) {
-        List<Review> reviews = rr.findReviewsByMovieId(id);
-        if (reviews == null) {
-            throw new ReviewNotFoundException();
+    public List<Review> getReviewsByMovieId(String id) {
+        Optional<List<Review>> reviews = rr.findReviewsByMovieId(id);
+        if(reviews.isPresent()){
+
+            return reviews.get();
         } else {
-            return reviews;
+            throw new MovieNotFoundException();
         }
     }
 }

@@ -23,9 +23,10 @@ public class ReviewController {
         System.out.println("ReviewController was instantiated");
         this.rs = rs;
     }
-
+// This one is also not currently working, ummm we also get an illegalargumentsexception which says the parameter does not have the expected type.
+    //java.lang.IllegalArgumentException: Parameter value [1] did not match expected type [com.revature.entities.Movie (n/a)]
     @GetMapping("/{movieID}")
-    public ResponseEntity<List<Review>> getReviewsByMovieId(@PathVariable("id") int id) {
+    public ResponseEntity<List<Review>> getReviewsByMovieId(@PathVariable("movieID") String id) {
         List<Review> reviews = rs.getReviewsByMovieId(id);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
