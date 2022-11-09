@@ -6,7 +6,7 @@ import com.revature.entities.User;
 import java.util.Objects;
 
 public class UserDTO {
-    private int id;
+    private String id;
     private String username;
     private Role role;
 
@@ -17,18 +17,18 @@ public class UserDTO {
     public UserDTO(){
     }
     public UserDTO(User user) {
-        this.id = user.getId();
+        this.id = user.getUser_id();
         this.username = user.getUsername();
         this.role = user.getRole();
         this.first = user.getFirst();
         this.last = user.getLast();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -19,7 +19,7 @@ public class UserService {
     private UserRepository ur;
 
     public UserDTO getUserByUsername(String username) {
-        User user = ur.findByUsername(username);
+        User user = ur.findUserByUsername(username).orElseThrow(() -> new UserNotFoundException());
         UserDTO userDTO = new UserDTO(user);
         return userDTO;
     }
@@ -51,21 +51,18 @@ public class UserService {
 
     public UserDTO registerUser(RegisterDTO register) {
         //check if username from register instance exists
-        User user = ur.findUserByUsername(register.getUsername());
-        if (user!=null) {
+        if (ur.findUserByUsername(register.getUsername()).isPresent()){
             throw new RegisterException();
-        } else {
-            User newUser = new User();
-            newUser.setFirst(register.getFirstName());
-            newUser.setLast(register.getLastName());
-            newUser.setUsername(register.getUsername());
-            newUser.setPassword(register.getPassword());
-            newUser.setRole(Role.EGG);
-
-            // .save saves into the database
-            user = ur.save(newUser);
         }
 
-        return new UserDTO(user);
+        User newUser = new User();
+        newUser.setFirst(register.getFirstName());
+        newUser.setLast(register.getLastName());
+        newUser.setUsername(register.getUsername());
+        newUser.setPassword(register.getPassword());
+        newUser.setRole(Role.EGG);
+
+        // .save saves into the database
+        return new UserDTO(ur.save(newUser));
     }
 }

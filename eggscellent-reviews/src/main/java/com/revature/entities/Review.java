@@ -2,11 +2,10 @@ package com.revature.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name="reviews")
-public class Reviews {
+public class Review {
     @Id
     @Column(name="review_id")
     private String id;
@@ -15,11 +14,16 @@ public class Reviews {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user_id;
 
+    @Column(nullable = false)
+    private String title;
+    @Column(nullable = false)
+    private String summary;
+
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
-    private Movies movieId;
+    private Movie movieId;
 
-    public Reviews(){
+    public Review(){
     }
 
     public String getId() {
@@ -38,20 +42,38 @@ public class Reviews {
         this.user_id = user_id;
     }
 
-    public Movies getMovie_id() {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public Movie getMovieId() {
         return movieId;
     }
 
-    public void setMovie_id(Movies movie_id) {
+    public void setMovieId(Movie movie_id) {
         this.movieId = movie_id;
     }
 
     @Override
     public String toString() {
-        return "Reviews{" +
+        return "Review{" +
                 "id='" + id + '\'' +
                 ", user_id=" + user_id +
-                ", movie_id=" + movieId +
+                ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
+                ", movieId=" + movieId +
                 '}';
     }
 
@@ -59,12 +81,12 @@ public class Reviews {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Reviews reviews = (Reviews) o;
-        return Objects.equals(id, reviews.id) && Objects.equals(user_id, reviews.user_id) && Objects.equals(movieId, reviews.movieId);
+        Review review = (Review) o;
+        return Objects.equals(id, review.id) && Objects.equals(user_id, review.user_id) && Objects.equals(title, review.title) && Objects.equals(summary, review.summary) && Objects.equals(movieId, review.movieId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user_id, movieId);
+        return Objects.hash(id, user_id, title, summary, movieId);
     }
 }
