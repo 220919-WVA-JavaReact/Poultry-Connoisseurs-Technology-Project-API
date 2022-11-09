@@ -33,11 +33,11 @@ public class ReviewService {
             Movie movie = foundMovie.get();
 
             List<Review> foundReviews = rr.findByMovieId(movie);
-            List<ReviewDTO> parsedReviews = foundReviews.stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
-//            List<ReviewDTO> parsedReviews = new ArrayList<ReviewDTO>();
-//            for(Review review: foundReviews){
-//                parsedReviews.add(new ReviewDTO(review));
-//            }
+ //           List<ReviewDTO> parsedReviews = foundReviews.stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
+            List<ReviewDTO> parsedReviews = new ArrayList<>();
+            for(Review review: foundReviews){
+               parsedReviews.add(new ReviewDTO(review));
+            }
             return parsedReviews;
 
         } else {
