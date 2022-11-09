@@ -6,6 +6,8 @@ import com.revature.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MovieService {
 
@@ -14,12 +16,14 @@ public class MovieService {
     @Autowired
     public MovieService(MovieRepository mr) { this.mr = mr; }
 
-    public Movie getMovieById(int id) {
-        Movie movie = mr.findById(id);
-        if (movie == null) {
-            throw new MovieNotFoundException();
-        } else {
+    public Movie findByMovieId(String id) {
+        Optional<Movie> foundMovie = mr.findMovieById(id);
+
+        if(foundMovie.isPresent()){
+            Movie movie = foundMovie.get();
             return movie;
+        } else {
+            throw new MovieNotFoundException();
         }
     }
 }

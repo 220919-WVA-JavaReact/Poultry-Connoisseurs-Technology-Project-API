@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="movies")
+@Table(name="movie")
 public class Movie {
 
     @Id
@@ -24,6 +24,8 @@ public class Movie {
     private Float rating;
 
 
+    public Movie() {
+    }
 
     public Movie(String id, String title, Integer runtime, String stars, Float rating) {
         this.id = id;
