@@ -3,7 +3,6 @@ package com.revature.services;
 import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Movie;
 import com.revature.entities.Review;
-import com.revature.exceptions.MovieNotFoundException;
 import com.revature.exceptions.ReviewNotFoundException;
 import com.revature.repositories.MovieRepository;
 import com.revature.repositories.ReviewRepository;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -25,6 +23,11 @@ public class ReviewService {
     public ReviewService(ReviewRepository rr, MovieRepository mr) {
         this.rr = rr;
         this.mr = mr;
+    }
+
+    public List<Review> getAllReviews(){
+        List<Review> reviews = rr.findAll();
+        return reviews;
     }
     public List<ReviewDTO> getReviewsByMovieId(String id) {
         Optional<Movie> foundMovie = mr.findMovieById(id);
@@ -43,8 +46,11 @@ public class ReviewService {
         } else {
             throw new ReviewNotFoundException();
         }
-
-
-
     }
+
+    public Review createReview(Review review){
+        rr.save(review);
+        return review;
+    }
+
 }
