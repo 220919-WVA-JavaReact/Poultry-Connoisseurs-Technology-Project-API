@@ -18,6 +18,12 @@ import java.util.stream.Collectors;
 public class UserService {
     private UserRepository ur;
 
+    public UserDTO getUserByUsername(String username) {
+        User user = ur.findUserByUsername(username).orElseThrow(() -> new UserNotFoundException());
+        UserDTO userDTO = new UserDTO(user);
+        return userDTO;
+    }
+
     @Autowired
     public UserService(UserRepository ur) {
         this.ur = ur;
@@ -29,12 +35,6 @@ public class UserService {
 
         return userDTO;
         //response entity
-    }
-
-    public UserDTO getUserByUsername(String username) throws UserNotFoundException {
-        User user = ur.findUserByUsername(username).orElseThrow(() -> new UserNotFoundException());
-        UserDTO userDTO = new UserDTO(user);
-        return userDTO;
     }
 
     public List<UserDTO> getAllUsers() {
