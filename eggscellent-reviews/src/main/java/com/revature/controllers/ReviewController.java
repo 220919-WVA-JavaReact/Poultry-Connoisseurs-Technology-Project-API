@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.annotations.RoleFilter;
 import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Review;
 import com.revature.services.ReviewService;
@@ -30,9 +31,17 @@ public class ReviewController {
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
+    @RoleFilter(rolesAllowed = {"CHICK", "HEN", "ROOSTER"}) // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
     @PostMapping
     public ResponseEntity<Review> createReview(@RequestBody Review review){
         review = rs.createReview(review);
         return new ResponseEntity<>(review, HttpStatus.CREATED);
+    }
+    @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"}) // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
+    @DeleteMapping("/{reviewID}")
+    public ResponseEntity<Boolean> deleteReview(@PathVariable("reviewID") String id) {
+        String success = rs.deleteReviewById(id);
+        System.out.println(success);
+        return new ResponseEntity<>(true, HttpStatus.I_AM_A_TEAPOT);
     }
 }

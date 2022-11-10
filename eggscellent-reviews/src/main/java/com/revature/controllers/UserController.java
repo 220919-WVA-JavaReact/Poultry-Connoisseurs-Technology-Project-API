@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.annotations.RoleFilter;
 import com.revature.dtos.RegisterDTO;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
@@ -51,4 +52,14 @@ public class UserController {
         UserDTO userDTO = us.registerUser(register);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
+
+    //Function to change user's role ( implementation not final )
+    // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
+    @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"})
+    @PutMapping
+    public ResponseEntity<UserDTO> changeUserRole(@RequestBody UserDTO user) {
+        UserDTO updatedUser = us.updateRole(user);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
 }
