@@ -14,22 +14,17 @@ public class ReviewDTO{
 
     private String id;
 
+    private String userId;
+
+    private String authorUsername;
+
    // private UserDTO userId;
     private String title;
+
     private String summary;
 
     //private Movie movieId;
 
-    public ReviewDTO(Review review) {
-        this.id = review.getId();
-
-        this.title = review.getTitle();
-        this.summary = review.getSummary();
-
-    }
-
-    public ReviewDTO() {
-    }
 
     public String getId() {
         return id;
@@ -39,7 +34,21 @@ public class ReviewDTO{
         this.id = id;
     }
 
+    public String getUserId() {
+        return userId;
+    }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
+    }
 
     public String getTitle() {
         return title;
@@ -57,25 +66,25 @@ public class ReviewDTO{
         this.summary = summary;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReviewDTO reviewDTO = (ReviewDTO) o;
-        return Objects.equals(id, reviewDTO.id)&& Objects.equals(title, reviewDTO.title) && Objects.equals(summary, reviewDTO.summary);
+        return Objects.equals(id, reviewDTO.id) && Objects.equals(userId, reviewDTO.userId) && Objects.equals(authorUsername, reviewDTO.authorUsername) && Objects.equals(title, reviewDTO.title) && Objects.equals(summary, reviewDTO.summary);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, summary);
+        return Objects.hash(id, userId, authorUsername, title, summary);
     }
 
     @Override
     public String toString() {
         return "ReviewDTO{" +
                 "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", authorUsername='" + authorUsername + '\'' +
                 ", title='" + title + '\'' +
                 ", summary='" + summary + '\'' +
                 '}';
