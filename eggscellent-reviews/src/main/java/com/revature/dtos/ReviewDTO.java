@@ -14,18 +14,18 @@ public class ReviewDTO{
 
     private String id;
 
-    private UserDTO userId;
+   // private UserDTO userId;
     private String title;
     private String summary;
 
-    private Movie movieId;
+    //private Movie movieId;
 
     public ReviewDTO(Review review) {
         this.id = review.getId();
-        this.userId = new UserDTO(review.getUserId());
+
         this.title = review.getTitle();
         this.summary = review.getSummary();
-        this.movieId = review.getMovieId();
+
     }
 
     public ReviewDTO() {
@@ -39,13 +39,7 @@ public class ReviewDTO{
         this.id = id;
     }
 
-    public UserDTO getUserId() {
-        return userId;
-    }
 
-    public void setUserId(UserDTO userId) {
-        this.userId = userId;
-    }
 
     public String getTitle() {
         return title;
@@ -63,35 +57,27 @@ public class ReviewDTO{
         this.summary = summary;
     }
 
-    public Movie getMovieId() {
-        return movieId;
-    }
 
-    public void setMovieId(Movie movieId) {
-        this.movieId = movieId;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReviewDTO reviewDTO = (ReviewDTO) o;
-        return Objects.equals(id, reviewDTO.id) && Objects.equals(userId, reviewDTO.userId) && Objects.equals(title, reviewDTO.title) && Objects.equals(summary, reviewDTO.summary) && Objects.equals(movieId, reviewDTO.movieId);
+        return Objects.equals(id, reviewDTO.id)&& Objects.equals(title, reviewDTO.title) && Objects.equals(summary, reviewDTO.summary);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, title, summary, movieId);
+        return Objects.hash(id, title, summary);
     }
 
     @Override
     public String toString() {
         return "ReviewDTO{" +
                 "id='" + id + '\'' +
-                ", userId=" + userId +
                 ", title='" + title + '\'' +
                 ", summary='" + summary + '\'' +
-                ", movieId=" + movieId +
                 '}';
     }
 }
