@@ -25,8 +25,8 @@ public class ReviewDTO{
         this.id = review.getId();
         this.title = review.getTitle();
         this.summary = review.getSummary();
-
     }
+
 
     public String getId() {
         return id;
@@ -52,11 +52,13 @@ public class ReviewDTO{
         this.summary = summary;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReviewDTO reviewDTO = (ReviewDTO) o;
+
         return Objects.equals(id, reviewDTO.id) && Objects.equals(title, reviewDTO.title) && Objects.equals(summary, reviewDTO.summary);
     }
 
@@ -64,6 +66,7 @@ public class ReviewDTO{
     public int hashCode() {
         return Objects.hash(id, title, summary);
     }
+
     @Override
     public String toString() {
         return "ReviewDTO{" +
