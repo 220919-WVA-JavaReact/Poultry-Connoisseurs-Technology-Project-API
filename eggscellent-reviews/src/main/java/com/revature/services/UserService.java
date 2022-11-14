@@ -57,12 +57,11 @@ public class UserService {
 
         User newUser = new User();
         // ***************     NEEEEEEEEED TO CHANGE THIS TO A PROPER GENERATED ID WHEN SWAPPING TO DATABASE    ****************
-        newUser.setUserId("9657956878");
         newUser.setFirst(register.getFirstName());
         newUser.setLast(register.getLastName());
         newUser.setUsername(register.getUsername());
         newUser.setPassword(register.getPassword());
-        newUser.setRole(Role.EGG);
+        newUser.setRole(Role.CHICK);
 
 
 

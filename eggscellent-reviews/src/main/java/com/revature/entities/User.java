@@ -10,7 +10,6 @@ import java.util.UUID;
 public class User {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private String userId;
     @Column(name = "first_name", nullable = false)
@@ -24,8 +23,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
     //do our relationships
-    @ManyToOne
-    private User moderator;
+//    @ManyToOne
+//    private User moderator;
     //stretch goal views views_status
 
     public User(String id, String first, String last, String username, String password, Role role) {
@@ -46,6 +45,9 @@ public class User {
     }
 
     public User() {
+
+            this.userId = UUID.randomUUID().toString();
+
     }
 
     public String getUserId() {
@@ -96,11 +98,11 @@ public class User {
         this.role = role;
     }
 
-    public User getModerator() {
-        return moderator;
-    }
-
-    public void setModerator(User moderator) {
-        this.moderator = moderator;
-    }
+//    public User getModerator() {
+//        return moderator;
+//    }
+//
+//    public void setModerator(User moderator) {
+//        this.moderator = moderator;
+//    }
 }
