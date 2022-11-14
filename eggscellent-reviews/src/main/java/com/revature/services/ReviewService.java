@@ -40,11 +40,13 @@ public class ReviewService {
             List<ReviewDTO> parsedReviews = new ArrayList<>();
             for(Review review: foundReviews){
                 ReviewDTO testDTO = new ReviewDTO();
+
                 testDTO.setUserId(review.getUserId().getUserId());
                 testDTO.setAuthorUsername(review.getUserId().getUsername());
                 testDTO.setId(review.getId());
                 testDTO.setTitle(review.getTitle());
                 testDTO.setSummary(review.getSummary());
+
                 parsedReviews.add(testDTO);
             }
             return parsedReviews;
