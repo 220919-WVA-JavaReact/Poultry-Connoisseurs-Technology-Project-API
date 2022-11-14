@@ -19,6 +19,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 //@SpringBootTest(classes = EggscellentReviewsApplication.class)
 //public class UserServiceTest {
 //
+@SpringBootTest(classes = EggscellentReviewsApplication.class)
+public class UserServiceTest {
+
 //    @MockBean
 //    private UserRepository mockRepository;
 //
@@ -84,3 +87,4 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 //        assertThrows(UserNotFoundException.class, () -> sut.getUserByUsername("egg-sucker420"));
 //    }
 //}
+}
