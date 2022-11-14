@@ -61,4 +61,8 @@ public class ReviewService {
         return review;
     }
 
+    public String deleteReviewById(String id) {
+        rr.deleteById(id);
+        return id;
+    }
 }

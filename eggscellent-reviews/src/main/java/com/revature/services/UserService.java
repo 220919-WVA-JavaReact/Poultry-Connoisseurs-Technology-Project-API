@@ -56,13 +56,24 @@ public class UserService {
         }
 
         User newUser = new User();
+        // ***************     NEEEEEEEEED TO CHANGE THIS TO A PROPER GENERATED ID WHEN SWAPPING TO DATABASE    ****************
         newUser.setFirst(register.getFirstName());
         newUser.setLast(register.getLastName());
         newUser.setUsername(register.getUsername());
         newUser.setPassword(register.getPassword());
-        newUser.setRole(Role.EGG);
+        newUser.setRole(Role.CHICK);
+
+
+
 
         // SAVE EXPECTS EITHER : WE ASSIGN AN ID ABOVE^^   (( OR ))   we put logic in entities to assign id on creation
         return new UserDTO(ur.save(newUser));
     }
+
+    //May need to iron out functionality on this one. Might be missing a few things. ( HOW TO "UPDATE" ? )
+//    public UserDTO updateRole(UserDTO user) {
+//
+//        return new UserDTO(ur.)
+//
+//    }
 }

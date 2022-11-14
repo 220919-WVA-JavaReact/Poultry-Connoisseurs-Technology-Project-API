@@ -70,6 +70,9 @@
 			<activation>
 				 <activeByDefault>true</activeByDefault>
 			</activation>
+
+
+
 			<properties>
 				<build.profile.id>dev</build.profile.id>
 				<profileActive>dev</profileActive>
@@ -77,6 +80,7 @@
 		</profile>
 		<profile>
 			<id>prod</id>
+			
 			<properties>
 				<build.profile.id>prod</build.profile.id>
 				<profileActive>prod</profileActive>

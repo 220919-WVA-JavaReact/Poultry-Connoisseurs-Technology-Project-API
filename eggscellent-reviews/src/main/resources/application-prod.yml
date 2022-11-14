@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://database-1.crn27pdjfd0w.us-east-1.rds.amazonaws.com:5432/postgres # Environment variables to not hardcode values
+    username: postgres
+    password: shin2244
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate # Specifies how Hibernate should interact with existing tables
+
+server:
+  port: 5000

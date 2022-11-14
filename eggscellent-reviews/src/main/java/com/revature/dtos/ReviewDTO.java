@@ -12,18 +12,30 @@ import java.util.Objects;
 
 public class ReviewDTO{
 
+    //editing review DTO on 11/12 to no longer include UserDTO and Movie obj
     private String id;
+
 
     private String userId;
 
     private String authorUsername;
 
    // private UserDTO userId;
+
     private String title;
 
     private String summary;
 
+
     //private Movie movieId;
+
+
+
+    public ReviewDTO(Review review) {
+        this.id = review.getId();
+        this.title = review.getTitle();
+        this.summary = review.getSummary();
+    }
 
 
     public String getId() {
@@ -33,6 +45,7 @@ public class ReviewDTO{
     public void setId(String id) {
         this.id = id;
     }
+
 
     public String getUserId() {
         return userId;
@@ -49,6 +62,7 @@ public class ReviewDTO{
     public void setAuthorUsername(String authorUsername) {
         this.authorUsername = authorUsername;
     }
+
 
     public String getTitle() {
         return title;
@@ -71,7 +85,7 @@ public class ReviewDTO{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReviewDTO reviewDTO = (ReviewDTO) o;
-        return Objects.equals(id, reviewDTO.id) && Objects.equals(userId, reviewDTO.userId) && Objects.equals(authorUsername, reviewDTO.authorUsername) && Objects.equals(title, reviewDTO.title) && Objects.equals(summary, reviewDTO.summary);
+        return Objects.equals(id, reviewDTO.id) && Objects.equals(userId, reviewDTO.userId) && Objects.equals(authorUsername, reviewDTO.authorUsername) && Objects.equals(title, reviewDTO.title) && Objects.equals(summary, reviewDTO.summary);    
     }
 
     @Override
