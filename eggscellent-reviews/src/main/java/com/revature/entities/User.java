@@ -10,7 +10,6 @@ import java.util.UUID;
 public class User {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private String userId;
     @Column(name = "first_name", nullable = false)
@@ -46,6 +45,9 @@ public class User {
     }
 
     public User() {
+
+            this.userId = UUID.randomUUID().toString();
+
     }
 
     public String getUserId() {
