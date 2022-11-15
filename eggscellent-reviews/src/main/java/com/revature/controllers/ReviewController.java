@@ -24,6 +24,19 @@ public class ReviewController {
         this.rs = rs;
     }
 
+    @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"})
+    @GetMapping
+    public ResponseEntity<List<Review>> getAllReviews(){
+        List<Review> reviews = rs.getAllReviews();
+        return new ResponseEntity<>(reviews, HttpStatus.OK);
+    }
+    @RoleFilter(rolesAllowed = {"CHICK", "HEN", "ROOSTER"})
+    @GetMapping("/users/{userID}")
+    public ResponseEntity<List<Review>> getReviewByUserId(@PathVariable("userID") String id){
+        List<Review> reviews = rs.getReviewsByUserId(id);
+        return new ResponseEntity<>(reviews, HttpStatus.OK);
+    }
+
     @GetMapping("/{movieID}")
     public ResponseEntity<List<ReviewDTO>> getReviewsByMovieId(@PathVariable("movieID") String id) {
         List<ReviewDTO> reviews = rs.getReviewsByMovieId(id);

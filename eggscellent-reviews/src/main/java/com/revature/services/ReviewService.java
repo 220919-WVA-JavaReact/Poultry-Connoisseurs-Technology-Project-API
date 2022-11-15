@@ -35,6 +35,13 @@ public class ReviewService {
         List<Review> reviews = rr.findAll();
         return reviews;
     }
+
+    public List<Review> getReviewsByUserId(String id){
+        User u = ur.findById(id).orElseThrow(() -> new UserNotFoundException());
+        List<Review> reviews = rr.findByUserId(u);
+
+        return reviews;
+    }
     public List<ReviewDTO> getReviewsByMovieId(String id) {
         Optional<Movie> foundMovie = mr.findMovieById(id);
 
