@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers(@RequestParam(name="role", required = false) Role role){
         List<UserDTO> users = null;
-
+        System.out.println(users);
         if (role == null) {
             users = us.getAllUsers();
             return new ResponseEntity<>(users, HttpStatus.OK);
