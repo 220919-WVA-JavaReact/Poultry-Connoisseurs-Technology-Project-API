@@ -16,6 +16,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+//@SpringBootTest(classes = EggscellentReviewsApplication.class)
+//public class UserServiceTest {
+//
 @SpringBootTest(classes = EggscellentReviewsApplication.class)
 public class UserServiceTest {
 
@@ -83,4 +86,5 @@ public class UserServiceTest {
 //
 //        assertThrows(UserNotFoundException.class, () -> sut.getUserByUsername("egg-sucker420"));
 //    }
+//}
 }
