@@ -60,7 +60,22 @@ public class MovieService {
             return foundMovies;
         }
 
-
     }
 
+
+    public boolean toggleWatchedMovieByUserId(String id, Movie movie) {
+        User user = ur.findById(id).orElseThrow(()-> new UserNotFoundException());
+        UserMovie result = umr.findByUserIdAndMovieId(user, movie);
+
+        if(result == null) {
+            UserMovie watchedMovie = new UserMovie();
+            watchedMovie.setUserId(user);
+            watchedMovie.setMovieId(movie);
+            umr.save(watchedMovie);
+            return true;
+        } else {
+            umr.delete(result);
+        }
+        return false;
+    }
 }

@@ -31,8 +31,8 @@ public class ReviewDTO{
 
 
     public ReviewDTO() {
-
     }
+
     public ReviewDTO(Review review) {
         this.id = review.getId();
         this.title = review.getTitle();
