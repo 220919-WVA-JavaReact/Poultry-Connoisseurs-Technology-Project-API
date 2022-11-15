@@ -30,6 +30,8 @@ public class ReviewDTO{
     //private Movie movieId;
 
 
+    public ReviewDTO() {
+    }
 
     public ReviewDTO(Review review) {
         this.id = review.getId();
