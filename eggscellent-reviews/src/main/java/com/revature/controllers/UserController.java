@@ -3,8 +3,11 @@ package com.revature.controllers;
 import com.revature.annotations.RoleFilter;
 import com.revature.dtos.RegisterDTO;
 import com.revature.dtos.UserDTO;
+import com.revature.entities.Movie;
 import com.revature.entities.Role;
 import com.revature.entities.User;
+import com.revature.entities.UserMovie;
+import com.revature.services.MovieService;
 import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,11 +21,13 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     private UserService us;
+    private MovieService ms;
 
     @Autowired
-    public UserController(UserService us){
+    public UserController(UserService us, MovieService ms){
         System.out.println("UserController was instantiated");
         this.us = us;
+        this.ms = ms;
     }
 
     @GetMapping
@@ -54,6 +59,18 @@ public class UserController {
     public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterDTO register) {
         UserDTO userDTO = us.registerUser(register);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}/watched")
+    public ResponseEntity<List<Movie>> getMoviesByUserId(@PathVariable("id") String id){
+        List<Movie> watchedList = ms.getWatchedMoviesByUserId(id);
+        return new ResponseEntity<>(watchedList, HttpStatus.OK);
+    }
+
+    @PostMapping(consumes = "application/json", produces = "application/json", value = "/{id}/watched")
+    public ResponseEntity<Boolean> toggleMovieByUserId(@PathVariable("id") String id, @RequestBody Movie movie){
+        Boolean toggleMovie = ms.toggleWatchedMovieByUserId(id, movie);
+        return new ResponseEntity<>(toggleMovie, HttpStatus.OK);
     }
 
     //Function to change user's role ( implementation not final )
