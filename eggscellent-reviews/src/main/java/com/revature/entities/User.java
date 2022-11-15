@@ -1,6 +1,7 @@
 package com.revature.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -22,6 +23,16 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
+//    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "users_movies",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "id")
+//    )
+//    private Set<Movie> movies = new HashSet<>();
+
     //do our relationships
 //    @ManyToOne
 //    private User moderator;
