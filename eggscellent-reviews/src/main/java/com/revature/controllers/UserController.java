@@ -6,6 +6,7 @@ import com.revature.dtos.UserDTO;
 import com.revature.entities.Movie;
 import com.revature.entities.Role;
 import com.revature.entities.User;
+import com.revature.entities.UserMovie;
 import com.revature.services.MovieService;
 import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,12 @@ public class UserController {
     public ResponseEntity<List<Movie>> getMoviesByUserId(@PathVariable("id") String id){
         List<Movie> watchedList = ms.getWatchedMoviesByUserId(id);
         return new ResponseEntity<>(watchedList, HttpStatus.OK);
+    }
+
+    @PostMapping(consumes = "application/json", produces = "application/json", value = "/{id}/watched")
+    public ResponseEntity<Boolean> toggleMovieByUserId(@PathVariable("id") String id, @RequestBody Movie movie){
+        Boolean toggleMovie = ms.toggleWatchedMovieByUserId(id, movie);
+        return new ResponseEntity<>(toggleMovie, HttpStatus.OK);
     }
 
     //Function to change user's role ( implementation not final )
