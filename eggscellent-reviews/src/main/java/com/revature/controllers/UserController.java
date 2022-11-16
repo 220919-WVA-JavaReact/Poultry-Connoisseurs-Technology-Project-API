@@ -74,6 +74,12 @@ public class UserController {
         return new ResponseEntity<>(toggleMovie, HttpStatus.OK);
     }
 
+    @PostMapping(consumes = "application/json", produces = "application/json", value = "/{id}/movies")
+    public ResponseEntity<Boolean> checkIfUserWatchedMovie(@PathVariable("id") String id, @RequestBody Movie movie){
+        Boolean watchedMovie = ms.checkIfUserWatchedMovie(id, movie);
+        return new ResponseEntity<>(watchedMovie, HttpStatus.OK);
+    }
+
     //Function to change user's role ( implementation not final )
     // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
 //    @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"})
