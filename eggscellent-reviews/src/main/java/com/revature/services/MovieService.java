@@ -78,4 +78,15 @@ public class MovieService {
         }
         return false;
     }
+
+    public Boolean checkIfUserWatchedMovie(String id, Movie movie) {
+        User user = ur.findById(id).orElseThrow(()-> new UserNotFoundException());
+
+        UserMovie watched = umr.findByUserIdAndMovieId(user, movie);
+
+        if (watched == null) {
+            return false;
+        }
+        return true;
+    }
 }
