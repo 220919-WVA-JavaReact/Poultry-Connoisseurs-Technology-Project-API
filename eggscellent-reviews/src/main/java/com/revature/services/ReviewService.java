@@ -1,9 +1,11 @@
 package com.revature.services;
 
+import com.revature.dtos.CreateReviewDTO;
 import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Movie;
 import com.revature.entities.Review;
 import com.revature.entities.User;
+import com.revature.exceptions.MovieNotFoundException;
 import com.revature.exceptions.ReviewNotFoundException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.MovieRepository;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -31,9 +34,10 @@ public class ReviewService {
         this.ur = ur;
     }
 
-    public List<Review> getAllReviews(){
+    public List<ReviewDTO> getAllReviews(){
         List<Review> reviews = rr.findAll();
-        return reviews;
+        List<ReviewDTO> parsedReviews = reviews.stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
+        return parsedReviews;
     }
 
     public List<Review> getReviewsByUserId(String id){
@@ -59,6 +63,7 @@ public class ReviewService {
                 testDTO.setId(review.getId());
                 testDTO.setTitle(review.getTitle());
                 testDTO.setSummary(review.getSummary());
+                testDTO.setMovieId(movie.getId());
 
                 parsedReviews.add(testDTO);
             }
@@ -69,13 +74,25 @@ public class ReviewService {
         }
     }
 
-    public Review createReview(Review review){
-        rr.save(review);
-        return review;
+    public Review createReview(CreateReviewDTO review){
+        Optional<Movie> foundMovie = mr.findMovieById(review.getMovieId());
+        Optional<User> foundUser = ur.findUserByUserId(review.getUserId());
+
+        if (foundMovie.isPresent() && foundUser.isPresent()){
+            Movie movie = foundMovie.get();
+            User user = foundUser.get();
+            Review newReview = new Review(user, review.getTitle(), review.getSummary(), movie);
+
+        rr.save(newReview);
+        return newReview;} else{
+            throw new MovieNotFoundException();
+        }
     }
 
     public String deleteReviewById(String id) {
         rr.deleteById(id);
         return id;
     }
+
+
 }

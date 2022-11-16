@@ -1,7 +1,10 @@
 package com.revature.entities;
 
+import com.revature.dtos.CreateReviewDTO;
+
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name="reviews")
@@ -23,8 +26,17 @@ public class Review {
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private Movie movieId;
 
-    public Review(){
+    public Review(User userId, String title, String summary, Movie movieId) {
+        this.id = UUID.randomUUID().toString();
+        this.userId = userId;
+        this.title = title;
+        this.summary = summary;
+        this.movieId = movieId;
     }
+    public Review(){
+        this.id = UUID.randomUUID().toString();
+    }
+
 
     public String getId() {
         return id;
