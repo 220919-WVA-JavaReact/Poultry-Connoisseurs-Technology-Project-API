@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.annotations.RoleFilter;
+import com.revature.dtos.CreateReviewDTO;
 import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Review;
 import com.revature.services.ReviewService;
@@ -27,8 +28,8 @@ public class ReviewController {
     @CrossOrigin
     @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"})
     @GetMapping
-    public ResponseEntity<List<Review>> getAllReviews(){
-        List<Review> reviews = rs.getAllReviews();
+    public ResponseEntity<List<ReviewDTO>> getAllReviews(){
+        List<ReviewDTO> reviews = rs.getAllReviews();
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
     @CrossOrigin
@@ -47,9 +48,9 @@ public class ReviewController {
     @CrossOrigin
     @RoleFilter(rolesAllowed = {"CHICK", "HEN", "ROOSTER"}) // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
     @PostMapping
-    public ResponseEntity<Review> createReview(@RequestBody Review review){
-        review = rs.createReview(review);
-        return new ResponseEntity<>(review, HttpStatus.CREATED);
+    public ResponseEntity<Review> createReview(@RequestBody CreateReviewDTO review){
+        Review result = rs.createReview(review);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
     @CrossOrigin
     @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"}) // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT

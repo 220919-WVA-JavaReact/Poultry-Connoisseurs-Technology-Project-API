@@ -27,7 +27,7 @@ public class ReviewDTO{
     private String summary;
 
 
-    //private Movie movieId;
+    private String movieId;
 
 
     public ReviewDTO() {
@@ -35,8 +35,11 @@ public class ReviewDTO{
 
     public ReviewDTO(Review review) {
         this.id = review.getId();
+        this.userId = review.getUserId().getUserId();
+        this.authorUsername = review.getUserId().getUsername();
         this.title = review.getTitle();
         this.summary = review.getSummary();
+        this.movieId = review.getMovieId().getId();
     }
 
 
@@ -104,6 +107,14 @@ public class ReviewDTO{
                 ", title='" + title + '\'' +
                 ", summary='" + summary + '\'' +
                 '}';
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
     }
 }
 
