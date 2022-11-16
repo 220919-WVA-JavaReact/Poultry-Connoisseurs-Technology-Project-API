@@ -39,9 +39,7 @@ public class SecurityAspect {
                 .getMethod()
                 .getAnnotation(RoleFilter.class)
                 .rolesAllowed());
-
-        String senderRole = req.getHeader("Role");
-
+        String senderRole = req.getHeader("authorization");
         if(allowedRoles.contains(senderRole)){
             return pjp.proceed();
         } else {

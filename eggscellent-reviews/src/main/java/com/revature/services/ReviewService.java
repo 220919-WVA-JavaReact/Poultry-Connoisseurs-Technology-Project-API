@@ -79,11 +79,5 @@ public class ReviewService {
         return id;
     }
 
-    public List<Review> getReviewsByUserId(String id){
-        User u = ur.findById(id).orElseThrow(() -> new UserNotFoundException());
-        List<Review> reviews = rr.findByUserId(u);
-
-        return reviews;
-    }
 
 }

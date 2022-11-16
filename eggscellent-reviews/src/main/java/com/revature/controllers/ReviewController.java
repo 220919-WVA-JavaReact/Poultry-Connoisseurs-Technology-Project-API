@@ -24,12 +24,14 @@ public class ReviewController {
         this.rs = rs;
     }
 
+    @CrossOrigin
     @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"})
     @GetMapping
     public ResponseEntity<List<Review>> getAllReviews(){
         List<Review> reviews = rs.getAllReviews();
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
+    @CrossOrigin
     @RoleFilter(rolesAllowed = {"CHICK", "HEN", "ROOSTER"})
     @GetMapping("/users/{userID}")
     public ResponseEntity<List<Review>> getReviewByUserId(@PathVariable("userID") String id){
@@ -42,19 +44,14 @@ public class ReviewController {
         List<ReviewDTO> reviews = rs.getReviewsByMovieId(id);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
-    @RoleFilter(rolesAllowed = {"CHICK", "HEN", "ROOSTER"})
-    @GetMapping("/users/{userID}")
-    public ResponseEntity<List<Review>> getReviewByUserId(@PathVariable("userID") String id){
-        List<Review> reviews = rs.getReviewsByUserId(id);
-        return new ResponseEntity<>(reviews, HttpStatus.OK);
-    }
-
+    @CrossOrigin
     @RoleFilter(rolesAllowed = {"CHICK", "HEN", "ROOSTER"}) // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
     @PostMapping
     public ResponseEntity<Review> createReview(@RequestBody Review review){
         review = rs.createReview(review);
         return new ResponseEntity<>(review, HttpStatus.CREATED);
     }
+    @CrossOrigin
     @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"}) // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
     @DeleteMapping("/{reviewID}")
     public ResponseEntity<Boolean> deleteReview(@PathVariable("reviewID") String id) {
