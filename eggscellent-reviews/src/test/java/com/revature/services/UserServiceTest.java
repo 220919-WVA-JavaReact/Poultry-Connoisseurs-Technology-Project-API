@@ -61,18 +61,18 @@ public class UserServiceTest {
     public void getUserByUsernameExists(){
         // A-1
         User returnedUser = new User();
-        returnedUser.setUserId("1");
+        returnedUser.setUserId("123456");
         returnedUser.setUsername("rooster-luvr69");
-        returnedUser.setPassword("eggy");
+        returnedUser.setPassword("pass");
         returnedUser.setRole(Role.ROOSTER);
         Mockito.when(mockRepository.findUserByUsername("rosster-luvr69")).thenReturn(Optional.of(returnedUser));
 
         UserDTO expected = new UserDTO();
-        expected.setId("1");
+        expected.setId("123456");
         expected.setUsername("rooster-luvr69");
         expected.setRole(Role.ROOSTER);
         // A-2
-        UserDTO actual = sut.getUserByUsername("rooster-luvr");
+        UserDTO actual = sut.getUserByUsername("rooster-luvr69");
         // A-3
         assertEquals(expected, actual);
     }
