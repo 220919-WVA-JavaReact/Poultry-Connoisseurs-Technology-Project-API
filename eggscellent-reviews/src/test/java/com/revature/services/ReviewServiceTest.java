@@ -5,6 +5,8 @@ import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Movie;
 import com.revature.entities.Review;
 import com.revature.entities.User;
+import com.revature.exceptions.ReviewNotFoundException;
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.MovieRepository;
 import com.revature.repositories.ReviewRepository;
 import com.revature.repositories.UserRepository;
@@ -43,6 +45,8 @@ public class ReviewServiceTest {
         User ian = new User();
         Movie chicken = new Movie();
         ian.setUserId("5");
+        ian.setUsername("ianbnel");
+        chicken.setId("2");
 
         Review review1 = new Review();
         review1.setId("1");
@@ -56,9 +60,26 @@ public class ReviewServiceTest {
         Mockito.when(mockUserRepository.findById(ian.getUserId())).thenReturn(Optional.of(ian));
         Mockito.when(mockReviewRepository.findByUserId(ian)).thenReturn(returned);
 
-        List<Review> actual = sut.getReviewsByUserId(ian.getUserId());
+        ReviewDTO expectedDTO = new ReviewDTO();
+        expectedDTO.setId("1");
+        expectedDTO.setUserId("5");
+        expectedDTO.setAuthorUsername("ianbnel");
+        expectedDTO.setTitle("title");
+        expectedDTO.setSummary("Summary");
+        expectedDTO.setMovieId("2");
 
-        assertEquals(returned, actual);
+        List<ReviewDTO> expected = new ArrayList<>();
+        expected.add(expectedDTO);
+
+        List<ReviewDTO> actual = sut.getReviewsByUserId(ian.getUserId());
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getReviewsByUserIdDoesNotExist(){
+        Mockito.when(mockUserRepository.findById("3000")).thenReturn(Optional.empty());
+        assertThrows(UserNotFoundException.class, () -> sut.getReviewsByUserId("3000"));
     }
 
     @Test
@@ -96,5 +117,10 @@ public class ReviewServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void getReviewsByMovieIdDoesNotExist() {
+        Mockito.when(mockMovieRepository.findMovieById("4000")).thenReturn(Optional.empty());
+        assertThrows(ReviewNotFoundException.class, () -> sut.getReviewsByMovieId("4000"));
+    }
 
 }

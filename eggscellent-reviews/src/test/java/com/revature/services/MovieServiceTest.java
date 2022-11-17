@@ -4,6 +4,8 @@ import com.revature.EggscellentReviewsApplication;
 import com.revature.entities.Movie;
 import com.revature.entities.User;
 import com.revature.entities.UserMovie;
+import com.revature.exceptions.MovieNotFoundException;
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.MovieRepository;
 import com.revature.repositories.UserMovieRepository;
 import com.revature.repositories.UserRepository;
@@ -16,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(classes = EggscellentReviewsApplication.class)
 public class MovieServiceTest {
@@ -45,11 +48,16 @@ public class MovieServiceTest {
     Movie actual = sut.findByMovieId(returnedMovie.getId());
 
     assertEquals(returnedMovie, actual);
-
     }
 
     @Test
-    public void toggleWatchedMovieByUserIdExists(){
+    public void findByMovieIdDoesNotExist(){
+        Mockito.when(mockMRepository.findMovieById("3000")).thenReturn(Optional.empty());
+        assertThrows(MovieNotFoundException.class, () -> sut.findByMovieId("3000"));
+    }
+
+    @Test
+    public void toggleWatchedMovieByUserIdAdd(){
         String id = "1";
         User ian = new User();
         ian.setUserId("1");
@@ -58,6 +66,7 @@ public class MovieServiceTest {
         UserMovie returnedUM = new UserMovie();
         returnedUM.setUserId(ian);
         returnedUM.setMovieId(chicken);
+
         boolean expected = false;
 
         Mockito.when(mockURepository.findById("1")).thenReturn(Optional.of(ian));
@@ -66,6 +75,32 @@ public class MovieServiceTest {
         Boolean actual = sut.toggleWatchedMovieByUserId(id, chicken);
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void toggleWatchedMovieByUserIdRemove(){
+        String id = "1";
+        User ian = new User();
+        ian.setUserId("1");
+        Movie chicken = new Movie();
+        chicken.setId("5");
+
+        boolean expected = true;
+
+        Mockito.when(mockURepository.findById("1")).thenReturn(Optional.of(ian));
+        Mockito.when(mockUMRepository.findByUserIdAndMovieId(ian, chicken)).thenReturn(null);
+
+        Boolean actual = sut.toggleWatchedMovieByUserId(id, chicken);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void toggleWatchedMovieByUserIdDoesNotExist(){
+        Mockito.when(mockURepository.findById("5038f")).thenReturn(Optional.empty());
+        Movie testMovie = new Movie();
+
+        assertThrows(UserNotFoundException.class, () -> sut.toggleWatchedMovieByUserId("5083f", testMovie));
     }
 
 }

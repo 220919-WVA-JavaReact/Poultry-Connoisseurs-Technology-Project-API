@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -65,7 +67,7 @@ public class UserServiceTest {
         returnedUser.setUsername("rooster-luvr69");
         returnedUser.setPassword("pass");
         returnedUser.setRole(Role.ROOSTER);
-        Mockito.when(mockRepository.findUserByUsername("rosster-luvr69")).thenReturn(Optional.of(returnedUser));
+        Mockito.when(mockRepository.findUserByUsername("rooster-luvr69")).thenReturn(Optional.of(returnedUser));
 
         UserDTO expected = new UserDTO();
         expected.setId("123456");
@@ -82,6 +84,27 @@ public class UserServiceTest {
         Mockito.when(mockRepository.findUserByUsername("egg-sucker420")).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class, () -> sut.getUserByUsername("egg-sucker420"));
+    }
+
+    @Test
+    public void getAllUsers() {
+        User testUser = new User();
+        testUser.setUserId("5");
+        List<User> returnedList = new ArrayList<>();
+        returnedList.add(testUser);
+
+        Mockito.when(mockRepository.findAll()).thenReturn(returnedList);
+
+        UserDTO expectedUser = new UserDTO();
+        expectedUser.setId("5");
+        List<UserDTO> expected = new ArrayList<>();
+        expected.add(expectedUser);
+
+        List<UserDTO> actual = sut.getAllUsers();
+
+        assertEquals(expected, actual);
+
+
     }
 
 }
