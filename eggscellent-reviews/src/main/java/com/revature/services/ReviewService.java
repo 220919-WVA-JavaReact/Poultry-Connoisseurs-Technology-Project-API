@@ -40,11 +40,11 @@ public class ReviewService {
         return parsedReviews;
     }
 
-    public List<Review> getReviewsByUserId(String id){
+    public List<ReviewDTO> getReviewsByUserId(String id){
         User u = ur.findById(id).orElseThrow(() -> new UserNotFoundException());
         List<Review> reviews = rr.findByUserId(u);
-
-        return reviews;
+        List<ReviewDTO> parsedReviews = reviews.stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
+        return parsedReviews;
     }
     public List<ReviewDTO> getReviewsByMovieId(String id) {
         Optional<Movie> foundMovie = mr.findMovieById(id);
