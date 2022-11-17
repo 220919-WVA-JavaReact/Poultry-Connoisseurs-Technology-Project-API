@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,6 +56,25 @@ public class MovieServiceTest {
     public void findByMovieIdDoesNotExist(){
         Mockito.when(mockMRepository.findMovieById("3000")).thenReturn(Optional.empty());
         assertThrows(MovieNotFoundException.class, () -> sut.findByMovieId("3000"));
+    }
+
+    @Test
+    public void findAllMoviesExist() {
+        Movie testMovie = new Movie();
+        testMovie.setId("7");
+        List<Movie> returnList = new ArrayList<>();
+        returnList.add(testMovie);
+
+        Mockito.when(mockMRepository.findAll()).thenReturn(returnList);
+
+        Movie expectedMovie = new Movie();
+        expectedMovie.setId("7");
+        List<Movie> expected = new ArrayList<>();
+        expected.add(expectedMovie);
+
+        List<Movie> actual = sut.getAllMovies();
+
+        assertEquals(expected, actual);
     }
 
     @Test
