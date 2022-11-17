@@ -13,4 +13,7 @@ insert into reviews (review_id, user_id, title, summary, movie_id) values ('1', 
 insert into reviews (review_id, user_id, title, summary, movie_id) values ('2', '567890', 'Worst thing I have ever seen', 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT ', '1');
 insert into reviews (review_id, user_id, title, summary, movie_id) values ('3', '54', 'Good thing I recently had eye surgery', 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT ', '2');
 insert into reviews (review_id, user_id, title, summary, movie_id) values ('4', '999', 'Only diehard fans will like this pile of', 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT ', '2');
-insert into reviews (review_id, user_id, title, summary, movie_id) values ('5', '67544', 'Yeah this was a massive disappointment.', 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT ', '1');
+insert into reviews (review_id, user_id, title, summary, movie_id) values ('5', '67544', 'Yeah this was a massive disappointment.', 'SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT SUMMARY TEXT, Everybody else is Second Best ', '1');
+insert into users_movies (user_id, movie_id) values ('123456', '1');
+insert into users_movies (user_id, movie_id) values ('123456', '2');
+insert into users_movies (user_id, movie_id) values ('123456', '4');

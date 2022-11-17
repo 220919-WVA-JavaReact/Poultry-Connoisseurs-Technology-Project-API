@@ -10,4 +10,5 @@ public class EggscellentReviewsApplication {
 		SpringApplication.run(EggscellentReviewsApplication.class, args);
 	}
 
+
 }

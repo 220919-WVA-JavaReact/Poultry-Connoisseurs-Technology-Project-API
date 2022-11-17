@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.annotations.RoleFilter;
+import com.revature.dtos.CreateReviewDTO;
 import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Review;
 import com.revature.services.ReviewService;
@@ -23,25 +24,41 @@ public class ReviewController {
         System.out.println("ReviewController was instantiated");
         this.rs = rs;
     }
-// This one is also not currently working, ummm we also get an illegalargumentsexception which says the parameter does not have the expected type.
-    //java.lang.IllegalArgumentException: Parameter value [1] did not match expected type [com.revature.entities.Movie (n/a)]
+
+    @CrossOrigin
+    @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"})
+    @GetMapping
+    public ResponseEntity<List<ReviewDTO>> getAllReviews(){
+        List<ReviewDTO> reviews = rs.getAllReviews();
+        return new ResponseEntity<>(reviews, HttpStatus.OK);
+    }
+    @CrossOrigin
+    @RoleFilter(rolesAllowed = {"CHICK", "HEN", "ROOSTER"})
+    @GetMapping("/users/{userID}")
+    public ResponseEntity<List<ReviewDTO>> getReviewByUserId(@PathVariable("userID") String id){
+        List<ReviewDTO> reviews = rs.getReviewsByUserId(id);
+        return new ResponseEntity<>(reviews, HttpStatus.OK);
+    }
+
     @GetMapping("/{movieID}")
     public ResponseEntity<List<ReviewDTO>> getReviewsByMovieId(@PathVariable("movieID") String id) {
         List<ReviewDTO> reviews = rs.getReviewsByMovieId(id);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
-
+    @CrossOrigin
     @RoleFilter(rolesAllowed = {"CHICK", "HEN", "ROOSTER"}) // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
     @PostMapping
-    public ResponseEntity<Review> createReview(@RequestBody Review review){
-        review = rs.createReview(review);
-        return new ResponseEntity<>(review, HttpStatus.CREATED);
+    public ResponseEntity<Review> createReview(@RequestBody CreateReviewDTO review){
+        Review result = rs.createReview(review);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
+    @CrossOrigin
     @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"}) // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
     @DeleteMapping("/{reviewID}")
     public ResponseEntity<Boolean> deleteReview(@PathVariable("reviewID") String id) {
         String success = rs.deleteReviewById(id);
         System.out.println(success);
-        return new ResponseEntity<>(true, HttpStatus.I_AM_A_TEAPOT);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
+
 }

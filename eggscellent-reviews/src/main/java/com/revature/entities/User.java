@@ -1,6 +1,7 @@
 package com.revature.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -10,7 +11,6 @@ import java.util.UUID;
 public class User {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private String userId;
     @Column(name = "first_name", nullable = false)
@@ -23,9 +23,19 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
+//    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "users_movies",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "id")
+//    )
+//    private Set<Movie> movies = new HashSet<>();
+
     //do our relationships
-    @ManyToOne
-    private User moderator;
+//    @ManyToOne
+//    private User moderator;
     //stretch goal views views_status
 
     public User(String id, String first, String last, String username, String password, Role role) {
@@ -46,6 +56,9 @@ public class User {
     }
 
     public User() {
+
+            this.userId = UUID.randomUUID().toString();
+
     }
 
     public String getUserId() {
@@ -96,11 +109,11 @@ public class User {
         this.role = role;
     }
 
-    public User getModerator() {
-        return moderator;
-    }
-
-    public void setModerator(User moderator) {
-        this.moderator = moderator;
-    }
+//    public User getModerator() {
+//        return moderator;
+//    }
+//
+//    public void setModerator(User moderator) {
+//        this.moderator = moderator;
+//    }
 }

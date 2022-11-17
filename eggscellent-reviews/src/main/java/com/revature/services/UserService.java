@@ -18,15 +18,15 @@ import java.util.stream.Collectors;
 public class UserService {
     private UserRepository ur;
 
+    @Autowired
+    public UserService(UserRepository ur) {
+        this.ur = ur;
+    }
+
     public UserDTO getUserByUsername(String username) {
         User user = ur.findUserByUsername(username).orElseThrow(() -> new UserNotFoundException());
         UserDTO userDTO = new UserDTO(user);
         return userDTO;
-    }
-
-    @Autowired
-    public UserService(UserRepository ur) {
-        this.ur = ur;
     }
 
     public UserDTO getUserById(String id) {
@@ -57,12 +57,11 @@ public class UserService {
 
         User newUser = new User();
         // ***************     NEEEEEEEEED TO CHANGE THIS TO A PROPER GENERATED ID WHEN SWAPPING TO DATABASE    ****************
-        newUser.setUserId("9657956878");
         newUser.setFirst(register.getFirstName());
         newUser.setLast(register.getLastName());
         newUser.setUsername(register.getUsername());
         newUser.setPassword(register.getPassword());
-        newUser.setRole(Role.EGG);
+        newUser.setRole(Role.CHICK);
 
 
 
@@ -72,9 +71,10 @@ public class UserService {
     }
 
     //May need to iron out functionality on this one. Might be missing a few things. ( HOW TO "UPDATE" ? )
-//    public UserDTO updateRole(UserDTO user) {
-//
-//        return new UserDTO(ur.)
-//
-//    }
+    public UserDTO updateRole(UserDTO user) {
+        User userData = ur.findById(user.getId()).orElseThrow(() -> new UserNotFoundException());
+        userData.setRole(user.getRole());
+        return new UserDTO(ur.save(userData));
+
+    }
 }

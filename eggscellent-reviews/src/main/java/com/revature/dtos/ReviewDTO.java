@@ -12,22 +12,36 @@ import java.util.Objects;
 
 public class ReviewDTO{
 
+    //editing review DTO on 11/12 to no longer include UserDTO and Movie obj
     private String id;
 
-    private UserDTO userId;
+
+    private String userId;
+
+    private String authorUsername;
+
+   // private UserDTO userId;
+
     private String title;
+
     private String summary;
 
 
-    public ReviewDTO(Review review) {
-        this.id = review.getId();
-        this.userId = new UserDTO(review.getUserId());
-        this.title = review.getTitle();
-        this.summary = review.getSummary();
-    }
+    private String movieId;
+
 
     public ReviewDTO() {
     }
+
+    public ReviewDTO(Review review) {
+        this.id = review.getId();
+        this.userId = review.getUserId().getUserId();
+        this.authorUsername = review.getUserId().getUsername();
+        this.title = review.getTitle();
+        this.summary = review.getSummary();
+        this.movieId = review.getMovieId().getId();
+    }
+
 
     public String getId() {
         return id;
@@ -37,13 +51,23 @@ public class ReviewDTO{
         this.id = id;
     }
 
-    public UserDTO getUserId() {
+
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(UserDTO userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
+    }
+
 
     public String getTitle() {
         return title;
@@ -61,29 +85,36 @@ public class ReviewDTO{
         this.summary = summary;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReviewDTO reviewDTO = (ReviewDTO) o;
-        return Objects.equals(id, reviewDTO.id) && Objects.equals(userId, reviewDTO.userId) && Objects.equals(title, reviewDTO.title) && Objects.equals(summary, reviewDTO.summary);
+        return Objects.equals(id, reviewDTO.id) && Objects.equals(userId, reviewDTO.userId) && Objects.equals(authorUsername, reviewDTO.authorUsername) && Objects.equals(title, reviewDTO.title) && Objects.equals(summary, reviewDTO.summary);    
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, title, summary);
+        return Objects.hash(id, userId, authorUsername, title, summary);
     }
 
     @Override
     public String toString() {
         return "ReviewDTO{" +
                 "id='" + id + '\'' +
-                ", userId=" + userId +
+                ", userId='" + userId + '\'' +
+                ", authorUsername='" + authorUsername + '\'' +
                 ", title='" + title + '\'' +
                 ", summary='" + summary + '\'' +
                 '}';
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
     }
 }
 

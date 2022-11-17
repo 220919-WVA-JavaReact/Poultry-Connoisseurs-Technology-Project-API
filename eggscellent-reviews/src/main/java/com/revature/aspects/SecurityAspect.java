@@ -3,6 +3,7 @@ package com.revature.aspects;
 import com.revature.annotations.RoleFilter;
 import com.revature.dtos.UserDTO;
 import com.revature.exceptions.UserNotFoundException;
+import com.revature.exceptions.UserUnauthorizedException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -38,13 +39,11 @@ public class SecurityAspect {
                 .getMethod()
                 .getAnnotation(RoleFilter.class)
                 .rolesAllowed());
-
-        String senderRole = req.getHeader("Role");
-
+        String senderRole = req.getHeader("authorization");
         if(allowedRoles.contains(senderRole)){
             return pjp.proceed();
         } else {
-            throw new UserNotFoundException();
+            throw new UserUnauthorizedException();
         }
 
 

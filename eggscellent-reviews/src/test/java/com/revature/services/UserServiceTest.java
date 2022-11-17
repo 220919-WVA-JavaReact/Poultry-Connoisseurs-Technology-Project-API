@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -61,18 +63,18 @@ public class UserServiceTest {
     public void getUserByUsernameExists(){
         // A-1
         User returnedUser = new User();
-        returnedUser.setUserId("1");
+        returnedUser.setUserId("123456");
         returnedUser.setUsername("rooster-luvr69");
-        returnedUser.setPassword("eggy");
+        returnedUser.setPassword("pass");
         returnedUser.setRole(Role.ROOSTER);
-        Mockito.when(mockRepository.findUserByUsername("rosster-luvr69")).thenReturn(Optional.of(returnedUser));
+        Mockito.when(mockRepository.findUserByUsername("rooster-luvr69")).thenReturn(Optional.of(returnedUser));
 
         UserDTO expected = new UserDTO();
-        expected.setId("1");
+        expected.setId("123456");
         expected.setUsername("rooster-luvr69");
         expected.setRole(Role.ROOSTER);
         // A-2
-        UserDTO actual = sut.getUserByUsername("rooster-luvr");
+        UserDTO actual = sut.getUserByUsername("rooster-luvr69");
         // A-3
         assertEquals(expected, actual);
     }
@@ -83,4 +85,45 @@ public class UserServiceTest {
 
         assertThrows(UserNotFoundException.class, () -> sut.getUserByUsername("egg-sucker420"));
     }
+
+    @Test
+    public void getAllUsersExist() {
+        User testUser = new User();
+        testUser.setUserId("5");
+        List<User> returnedList = new ArrayList<>();
+        returnedList.add(testUser);
+
+        Mockito.when(mockRepository.findAll()).thenReturn(returnedList);
+
+        UserDTO expectedUser = new UserDTO();
+        expectedUser.setId("5");
+        List<UserDTO> expected = new ArrayList<>();
+        expected.add(expectedUser);
+
+        List<UserDTO> actual = sut.getAllUsers();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getUsersByRoleExist () {
+        User testUser = new User();
+        testUser.setRole(Role.ROOSTER);
+        testUser.setUserId("7");
+        List<User> returnList = new ArrayList<>();
+        returnList.add(testUser);
+
+        Mockito.when(mockRepository.findUsersByRole(Role.ROOSTER)).thenReturn(returnList);
+
+        UserDTO expectedUser = new UserDTO();
+        expectedUser.setRole(Role.ROOSTER);
+        expectedUser.setId("7");
+        List<UserDTO> expected = new ArrayList<>();
+        expected.add(expectedUser);
+
+        List<UserDTO> actual = sut.getUsersByRole(Role.ROOSTER);
+
+        assertEquals(expected, actual);
+    }
+
 }
