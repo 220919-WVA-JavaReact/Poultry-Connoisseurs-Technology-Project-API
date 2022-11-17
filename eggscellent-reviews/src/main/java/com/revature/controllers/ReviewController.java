@@ -35,8 +35,8 @@ public class ReviewController {
     @CrossOrigin
     @RoleFilter(rolesAllowed = {"CHICK", "HEN", "ROOSTER"})
     @GetMapping("/users/{userID}")
-    public ResponseEntity<List<Review>> getReviewByUserId(@PathVariable("userID") String id){
-        List<Review> reviews = rs.getReviewsByUserId(id);
+    public ResponseEntity<List<ReviewDTO>> getReviewByUserId(@PathVariable("userID") String id){
+        List<ReviewDTO> reviews = rs.getReviewsByUserId(id);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
