@@ -71,9 +71,10 @@ public class UserService {
     }
 
     //May need to iron out functionality on this one. Might be missing a few things. ( HOW TO "UPDATE" ? )
-//    public UserDTO updateRole(UserDTO user) {
-//
-//        return new UserDTO(ur.)
-//
-//    }
+    public UserDTO updateRole(UserDTO user) {
+        User userData = ur.findById(user.getId()).orElseThrow(() -> new UserNotFoundException());
+        userData.setRole(user.getRole());
+        return new UserDTO(ur.save(userData));
+
+    }
 }

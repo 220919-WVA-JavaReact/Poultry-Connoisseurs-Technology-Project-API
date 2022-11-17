@@ -58,6 +58,7 @@ public class ReviewController {
     public ResponseEntity<Boolean> deleteReview(@PathVariable("reviewID") String id) {
         String success = rs.deleteReviewById(id);
         System.out.println(success);
-        return new ResponseEntity<>(true, HttpStatus.I_AM_A_TEAPOT);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
+
 }

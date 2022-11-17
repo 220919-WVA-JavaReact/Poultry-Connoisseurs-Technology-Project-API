@@ -81,12 +81,12 @@ public class UserController {
     }
 
     //Function to change user's role ( implementation not final )
-    // NEED TO ADD 'Role' field to header in postman from now on until we implement JWT
-//    @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"})
-//    @PutMapping
-//    public ResponseEntity<UserDTO> changeUserRole(@RequestBody UserDTO user) {
-//        UserDTO updatedUser = us.updateRole(user);
-//        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-//    }
+    @CrossOrigin
+    @RoleFilter(rolesAllowed = {"HEN", "ROOSTER"})
+    @PutMapping
+    public ResponseEntity<UserDTO> changeUserRole(@RequestBody UserDTO user) {
+        UserDTO updatedUser = us.updateRole(user);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
 
 }
