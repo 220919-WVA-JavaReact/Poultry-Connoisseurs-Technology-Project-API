@@ -87,7 +87,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getAllUsers() {
+    public void getAllUsersExist() {
         User testUser = new User();
         testUser.setUserId("5");
         List<User> returnedList = new ArrayList<>();
@@ -103,8 +103,27 @@ public class UserServiceTest {
         List<UserDTO> actual = sut.getAllUsers();
 
         assertEquals(expected, actual);
+    }
 
+    @Test
+    public void getUsersByRoleExist () {
+        User testUser = new User();
+        testUser.setRole(Role.ROOSTER);
+        testUser.setUserId("7");
+        List<User> returnList = new ArrayList<>();
+        returnList.add(testUser);
 
+        Mockito.when(mockRepository.findUsersByRole(Role.ROOSTER)).thenReturn(returnList);
+
+        UserDTO expectedUser = new UserDTO();
+        expectedUser.setRole(Role.ROOSTER);
+        expectedUser.setId("7");
+        List<UserDTO> expected = new ArrayList<>();
+        expected.add(expectedUser);
+
+        List<UserDTO> actual = sut.getUsersByRole(Role.ROOSTER);
+
+        assertEquals(expected, actual);
     }
 
 }

@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.EggscellentReviewsApplication;
 import com.revature.dtos.ReviewDTO;
+import com.revature.dtos.UserDTO;
 import com.revature.entities.Movie;
 import com.revature.entities.Review;
 import com.revature.entities.User;
@@ -38,6 +39,34 @@ public class ReviewServiceTest {
 
     @Autowired
     public ReviewService sut;
+
+    @Test
+    public void getAllReviewsExist() {
+        User testUser = new User();
+        testUser.setUserId("9");
+        Movie testMovie = new Movie();
+        testMovie.setId("8");
+        Review testReview = new Review();
+        testReview.setId("7");
+        testReview.setUserId(testUser);
+        testReview.setMovieId(testMovie);
+        List<Review> returnList = new ArrayList<>();
+        returnList.add(testReview);
+
+        Mockito.when(mockReviewRepository.findAll()).thenReturn(returnList);
+
+        UserDTO expectedUser = new UserDTO();
+        expectedUser.setId("9");
+        ReviewDTO expectedReview = new ReviewDTO();
+        expectedReview.setId("7");
+        expectedReview.setUserId(expectedUser.getId());
+        List<ReviewDTO> expected = new ArrayList<>();
+        expected.add(expectedReview);
+
+        List<ReviewDTO> actual = sut.getAllReviews();
+
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void getReviewsByUserIdExists(){
