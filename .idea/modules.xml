@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Poultry-Connoisseurs-Technology-Project-API.iml" filepath="$PROJECT_DIR$/.idea/Poultry-Connoisseurs-Technology-Project-API.iml" />
-      <module fileurl="file://$PROJECT_DIR$/eggscellent-reviews/eggscellent-reviews.iml" filepath="$PROJECT_DIR$/eggscellent-reviews/eggscellent-reviews.iml" />
     </modules>
   </component>
 </project>
