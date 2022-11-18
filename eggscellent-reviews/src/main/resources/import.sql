@@ -5,7 +5,7 @@ insert into users (user_id, first_name, last_name, username, password, role) val
 insert into users (user_id, first_name, last_name, username, password, role) values ('999', 'marrrrrley', 'nelson-robert', 'chickeroo', 'pass', 'HEN');
 insert into users (user_id, first_name, last_name, username, password, role) values ('67544', 'shirrrrrley', 'nelson-robert', 'rewstor', 'pass', 'CHICK');
 insert into users (user_id, first_name, last_name, username, password, role) values ('3', 'Rio', 'Gatz', 'FoulFowl22', 'eggyboi24', 'CHICK');
-insert into movies (id, title, runtime, stars, rating) values ('1', 'Richettes', 96, 'five', 3.5);
+insert into movies (id, title, runtime, stars, rating) values ('1', 'Chicken People', 96, 'Chicken People is a funny and uplifting look at the world of show chickens and the people who love them.', 3.5);
 insert into movies (id, title, runtime, stars, rating) values ('2', 'life of chicken', 111, 'four', 3);
 insert into movies (id, title, runtime, stars, rating) values ('3', 'life of chicken prequel', 56, 'three', 4);
 insert into movies (id, title, runtime, stars, rating) values ('4', 'life of chickens son', 76, 'two', 4);
